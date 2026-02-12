@@ -836,6 +836,22 @@
             .logo-shield { width: 36px; height: 36px; }
             .logo-primary, .logo-secondary { font-size: 12pt; }
         }
+        /* Fix select dropdown visibility */
+select option {
+    background-color: #111111;
+    color: #e0e0e0;
+}
+
+/* Alternative if the above doesn't work on all browsers */
+select {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+}
+
+select:focus option {
+    background-color: #111111;
+    color: #e0e0e0;
+}
     </style>
 </head>
 <body>
@@ -1169,6 +1185,7 @@
 
 </body>
 </html>
+
 
 
 
