@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guaranteed Bookings | Direct Booking Systems for Serviced Accommodation</title>
+    <meta name="description" content="We engineer direct booking acquisition systems for serviced accommodation operators. No OTA fees. Just outcomes.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #e0e0e0;
+            --text-muted: #888;
+            --gold: #D4AF37;
+            --gold-hover: #e5c158;
+            --border-subtle: rgba(212, 175, 55, 0.2);
+            --red: #ff4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Announcement Bar */
+        .announcement-bar {
+            background: var(--gold);
+            color: var(--bg-dark);
+            text-align: center;
+            padding: 12px;
+            font-size: 10pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 36px; /* Below announcement bar */
+            width: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Logo Lockup */
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo-shield {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .logo-shield::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .logo-shield span {
+            color: var(--gold);
+            font-size: 14pt;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-primary {
+            font-size: 15pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .logo-secondary {
+            font-size: 15pt;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 3px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .logo-tagline {
+            font-size: 7.5pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 28px;
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Gold Accent Line */
+        .nav-accent-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+            opacity: 0.4;
+        }
+        
+        /* HERO with Faded Background - 25% visible */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 160px 40px 80px;
+            position: relative;
+            background-image: 
+                linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.75) 50%, rgba(10,10,10,0.85) 100%),
+                url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            margin-top: 36px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-label {
+            font-size: 12pt;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            display: block;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        h1 {
+            font-size: 52pt;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+        }
+        
+        .hero-subtitle {
+            font-size: 16pt;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+        }
+        
+        .gold-line {
+            width: 100px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 50px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 20px 50px;
+            font-size: 12pt;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            background: rgba(10,10,10,0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Trust Indicators Bar */
+        .trust-bar {
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .trust-label {
+            font-size: 9pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+        
+        .trust-items {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            color: rgba(255,255,255,0.35);
+            font-size: 13pt;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .trust-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 60px;
+            padding-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36pt;
+            color: var(--gold);
+            font-weight: 300;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .stat-label {
+            font-size: 10pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+        
+        /* METHOD SECTION with subtle texture - 15% visible */
+        .method {
+            padding: 120px 40px;
+            background-color: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .method::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(to bottom, rgba(17,17,17,0.95), rgba(17,17,17,0.98)),
+                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h2 {
+            font-size: 32pt;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 14pt;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .blueprint-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blueprint-card {
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blueprint-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .step-num {
+            font-size: 11pt;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .blueprint-card h3 {
+            font-size: 14pt;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .blueprint-card p {
+            color: var(--text-muted);
+            font-size: 12pt;
+            line-height: 1.6;
+        }
+        
+        /* PROOF SECTION with corporate feel - 20% visible */
+        .proof {
+            padding: 120px 40px;
+            text-align: center;
+            position: relative;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+        }
+        
+        .proof::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(to bottom, rgba(10,10,10,0.9), rgba(10,10,10,0.95)),
+                url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .case-study {
+            border: 2px solid var(--gold);
+            padding: 60px;
+            max-width: 1000px;
+            margin: 60px auto 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .case-label {
+            font-size: 10pt;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .case-title {
+            font-size: 28pt;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+        
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .case-stat {
+            padding: 20px;
+        }
+        
+        .case-number {
+            font-size: 32pt;
+            color: var(--gold);
+            font-weight: 300;
+            display: block;
+        }
+        
+        .case-desc {
+            font-size: 10pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        .case-arrow {
+            font-size: 24pt;
+            color: var(--gold);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .view-live {
+            margin-top: 40px;
+            font-size: 12pt;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .view-live a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+        }
+        
+        /* OFFER SECTION with subtle luxury - 12% visible */
+        .offer {
+            padding: 120px 40px;
+            background-color: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(to right, rgba(17,17,17,0.95), rgba(17,17,17,0.9)),
+                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: right center;
+            opacity: 0.12;
+            z-index: 0;
+        }
+        
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .offer-content h2 {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .offer-content p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 13pt;
+        }
+        
+        .offer-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .offer-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 12pt;
+        }
+        
+        .offer-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .price-box {
+            border: 2px solid var(--gold);
+            padding: 50px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .price-label {
+            font-size: 10pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 48pt;
+            color: var(--gold);
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .price-note {
+            font-size: 11pt;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        
+        /* CONTACT SECTION - 10% visible */
+        .contact {
+            padding: 120px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(10,10,10,0.98), rgba(10,10,10,0.95)),
+                url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 60px auto 0;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 15px;
+            font-family: inherit;
+            font-size: 12pt;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: none;
+            padding: 20px;
+            font-size: 12pt;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .submit-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.95);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 14pt;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 10pt;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        .copyright {
+            color: var(--text-muted);
+            font-size: 9pt;
+            opacity: 0.6;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 32pt; }
+            h2 { font-size: 24pt; }
+            .hero { 
+                background-attachment: scroll; 
+                padding-top: 140px;
+                margin-top: 0;
+            }
+            .hero-stats { grid-template-columns: 1fr; gap: 30px; }
+            .blueprint-grid { grid-template-columns: 1fr; }
+            .offer-grid { grid-template-columns: 1fr; }
+            .case-stats { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .trust-items { flex-direction: column; gap: 15px; }
+            .announcement-bar { font-size: 8pt; padding: 8px; }
+            .nav-container { padding: 15px 20px; }
+            .logo-shield { width: 36px; height: 36px; }
+            .logo-primary, .logo-secondary { font-size: 12pt; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        Currently accepting 3 new operators for March deployment →
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo-lockup">
+                <div class="logo-shield">
+                    <span>GB</span>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">Guaranteed</span>
+                    <span class="logo-secondary">Bookings</span>
+                    <span class="logo-tagline">Direct Booking Systems</span>
+                </div>
+            </a>
+            
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#method">Method</a>
+                    <a href="#proof">Proof</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <a href="#contact" class="nav-cta">Book Strategy Call</a>
+            </div>
+        </div>
+        
+        <!-- Gold Accent Line -->
+        <div class="nav-accent-line"></div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="section-label">Direct Booking Systems</span>
+            <h1>We Engineer Demand,<br>Then Place The Unit</h1>
+            <div class="gold-line"></div>
+            <p class="hero-subtitle">
+                We don't start with property. We start with proven booking criteria. 
+                While most sell keys and hope, we build acquisition systems that 
+                eliminate OTA fees and capture corporate bookings on autopilot.
+            </p>
+            <a href="#contact" class="cta-button">Start Your System →</a>
+            
+            <!-- Trust Indicators Bar -->
+            <div class="trust-bar">
+                <p class="trust-label">Systems deployed for operators managing:</p>
+                <div class="trust-items">
+                    <div class="trust-item">50+ Unit Portfolios</div>
+                    <div class="trust-item">Corporate Housing</div>
+                    <div class="trust-item">Contractor Accommodation</div>
+                </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">£0</span>
+                    <span class="stat-label">OTA Commission</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3x</span>
+                    <span class="stat-label">Enquiry Rate Increase</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">14 Days</span>
+                    <span class="stat-label">Avg. Lead Response</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method -->
+    <section class="method" id="method">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Blueprint</span>
+                <h2>The Booking Engine Method</h2>
+                <p class="section-subtitle">
+                    Five components that separate professional operators 
+                    from hosts competing on price.
+                </p>
+            </div>
+            
+            <div class="blueprint-grid">
+                <div class="blueprint-card">
+                    <div class="step-num">01</div>
+                    <h3>The Qualification Hero</h3>
+                    <p>"Work-ready accommodation for projects 4+ weeks"—not "cozy getaway." Immediate professional positioning.</p>
+                </div>
+                
+                <div class="blueprint-card">
+                    <div class="step-num">02</div>
+                    <h3>Dual-Path Conversion</h3>
+                    <p>Individual availability check vs. Team enquiry. No forcing corporate clients through tourist booking flows.</p>
+                </div>
+                
+                <div class="blueprint-card">
+                    <div class="step-num">03</div>
+                    <h3>Trust Architecture</h3>
+                    <p>Gas Safe, EICR, construction firm logos—not Superhost badges. Compliance signals for procurement managers.</p>
+                </div>
+                
+                <div class="blueprint-card">
+                    <div class="step-num">04</div>
+                    <h3>Specification Grid</h3>
+                    <p>WiFi speed tests, desk dimensions, parking specs. Data that closes deals, not adjectives that describe them.</p>
+                </div>
+                
+                <div class="blueprint-card">
+                    <div class="step-num">05</div>
+                    <h3>Automation Backend</h3>
+                    <p>Enquiry → Spreadsheet → SMS alert in 60 seconds. Sub-2-hour response guarantee without manual monitoring.</p>
+                </div>
+                
+                <div class="blueprint-card" style="border-color: var(--gold); background: rgba(212, 175, 55, 0.05);">
+                    <div class="step-num" style="background: var(--gold); color: var(--bg-dark);">R</div>
+                    <h3>The Result</h3>
+                    <p>Direct bookings that compound. Guest databases you own. Zero platform dependency. Predictable revenue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof -->
+    <section class="proof" id="proof">
+        <span class="section-label">Case Study</span>
+        <h2>Proof, Not Promises</h2>
+        
+        <div class="case-study">
+            <span class="case-label">Live Deployment</span>
+            <h3 class="case-title">Contractor Accommodation Liverpool</h3>
+            
+            <div class="case-stats">
+                <div class="case-stat">
+                    <span class="case-number">Airbnb</span>
+                    <span class="case-desc">18% Commission</span>
+                    <span class="case-desc">Tourist Bookings</span>
+                    <span class="case-desc">Generic Listings</span>
+                </div>
+                
+                <div class="case-arrow">→</div>
+                
+                <div class="case-stat" style="border: 1px solid var(--gold); background: rgba(212, 175, 55, 0.1);">
+                    <span class="case-number">Direct</span>
+                    <span class="case-desc">0% Commission</span>
+                    <span class="case-desc">Corporate Teams</span>
+                    <span class="case-desc">Qualified Leads</span>
+                </div>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 13pt; margin-top: 30px;">
+                From platform dependency to booking independence. Same properties. Different system. Different profitability.
+            </p>
+            
+            <p class="view-live">
+                View the live system: <a href="https://contractoraccommodationliverpool.co.uk" target="_blank">contractoraccommodationliverpool.co.uk</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Offer -->
+    <section class="offer" id="offer">
+        <div class="offer-grid">
+            <div class="offer-content">
+                <span class="section-label">Replication Service</span>
+                <h2>We Clone This System<br>For Your Properties</h2>
+                
+                <p>Your own direct booking engine, built on the same framework that powers proven corporate accommodation sites.</p>
+                
+                <ul class="offer-list">
+                    <li>Dark-theme booking site (mobile-first)</li>
+                    <li>Dual-path enquiry system</li>
+                    <li>Automated lead capture to your n8n</li>
+                    <li>Corporate trust signals & compliance badges</li>
+                    <li>SEO-structured for "[Your City] contractor accommodation"</li>
+                    <li>Hosting & maintenance included</li>
+                </ul>
+                
+                <p style="margin-top: 30px; color: var(--gold); font-size: 11pt; text-transform: uppercase; letter-spacing: 1px;">
+                    Not a website. A booking acquisition system.
+                </p>
+            </div>
+            
+            <div class="price-box">
+                <div class="price-label">Investment</div>
+                <div class="price">£2,500</div>
+                <div class="price-note">One-time build + £75/month hosting</div>
+                
+                <div style="border-top: 1px solid var(--border-subtle); margin: 30px 0; padding-top: 30px;">
+                    <div class="price-label" style="margin-bottom: 15px;">Typical Client ROI</div>
+                    <div style="font-size: 14pt; color: var(--text-primary); margin-bottom: 10px;">
+                        Saves £14,000/year in OTA fees
+                    </div>
+                    <div style="font-size: 11pt; color: var(--text-muted);">
+                        Payback period: 2 months
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <span class="section-label">Start Here</span>
+        <h2>Strategy Session</h2>
+        <p class="section-subtitle">
+            15 minutes. We'll assess your current setup and 
+            outline the direct booking system for your market.
+        </p>
+        
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Property Portfolio Size</label>
+                <select name="portfolio_size" required>
+                    <option value="">Select...</option>
+                    <option value="1-3">1-3 units</option>
+                    <option value="4-10">4-10 units</option>
+                    <option value="11-25">11-25 units</option>
+                    <option value="25+">25+ units</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Current Challenge</label>
+                <textarea name="message" rows="4" placeholder="e.g., 80% of bookings come through Airbnb, high fees, need corporate clients..."></textarea>
+            </div>
+            
+            <input type="hidden" name="_next" value="https://guaranteedbookings.co.uk/thanks.html">
+            
+            <button type="submit" class="submit-btn">Request Strategy Call →</button>
+        </form>
+        
+        <p style="margin-top: 40px; color: var(--text-muted); font-size: 10pt;">
+            Or email directly: <a href="mailto:hello@guaranteedbookings.co.uk" style="color: var(--gold); text-decoration: none;">hello@guaranteedbookings.co.uk</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">GUARANTEED BOOKINGS</div>
+            <p class="footer-text">
+                Direct Booking Systems for Serviced Accommodation Operators
+            </p>
+            <div class="footer-links">
+                <a href="#method">Method</a>
+                <a href="#proof">Proof</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="copyright">
+                © 2026 Guaranteed Bookings Ltd. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
