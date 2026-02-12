@@ -1053,21 +1053,36 @@
         outline the direct booking system for your market.
     </p>
     
-    <!-- FORM SUBMITTING DIRECTLY TO N8N -->
     <form class="contact-form" id="leadForm">
         <div class="form-row">
             <div class="form-group">
-                <label>Name</label>
+                <label>Name *</label>
                 <input type="text" id="formName" required>
             </div>
             <div class="form-group">
-                <label>Email</label>
+                <label>Email *</label>
                 <input type="email" id="formEmail" required>
             </div>
         </div>
         
+        <div class="form-row">
+            <div class="form-group">
+                <label>Phone *</label>
+                <input type="tel" id="formPhone" placeholder="07700 900123" required>
+            </div>
+            <div class="form-group">
+                <label>Best Time to Call *</label>
+                <select id="formTime" required>
+                    <option value="">Select...</option>
+                    <option value="Morning (9am-12pm)">Morning (9am-12pm)</option>
+                    <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
+                    <option value="Evening (5pm-8pm)">Evening (5pm-8pm)</option>
+                </select>
+            </div>
+        </div>
+        
         <div class="form-group">
-            <label>Property Portfolio Size</label>
+            <label>Property Portfolio Size *</label>
             <select id="formSize" required>
                 <option value="">Select...</option>
                 <option value="1-3">1-3 units</option>
@@ -1078,8 +1093,8 @@
         </div>
         
         <div class="form-group">
-            <label>Current Challenge</label>
-            <textarea id="formMessage" rows="4" placeholder="e.g., 80% of bookings come through Airbnb, high fees, need corporate clients..."></textarea>
+            <label>Current Challenge / Notes</label>
+            <textarea id="formMessage" rows="3" placeholder="e.g., 80% of bookings come through Airbnb, high fees, need corporate clients..."></textarea>
         </div>
         
         <button type="submit" class="submit-btn" id="submitBtn">Request Strategy Call →</button>
@@ -1096,14 +1111,15 @@
         const data = {
             name: document.getElementById('formName').value,
             email: document.getElementById('formEmail').value,
+            phone: document.getElementById('formPhone').value,
+            best_time: document.getElementById('formTime').value,
             portfolio_size: document.getElementById('formSize').value,
             message: document.getElementById('formMessage').value,
             timestamp: new Date().toISOString(),
             source: 'sites.guaranteedbookings.co.uk'
         };
         
-        // YOUR N8N WEBHOOK URL
-        const N8N_WEBHOOK = 'https://n8n-self-hosted-2-6i3h.onrender.com/webhook/gb-leads';
+        const N8N_WEBHOOK = 'https://n8n-self-hosted-2-6i3h.onrender.com/webhook/lead-capture';
         
         try {
             const response = await fetch(N8N_WEBHOOK, {
@@ -1115,7 +1131,6 @@
             });
             
             if (response.ok) {
-                // SUCCESS - Redirect to your thank you page
                 window.location.href = 'https://sites.guaranteedbookings.co.uk/thank-you.html';
             } else {
                 throw new Error('Server error');
@@ -1154,6 +1169,7 @@
 
 </body>
 </html>
+
 
 
 
