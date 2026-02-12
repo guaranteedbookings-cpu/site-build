@@ -1044,17 +1044,17 @@
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <span class="section-label">Start Here</span>
-        <h2>Strategy Session</h2>
-        <p class="section-subtitle">
-            15 minutes. We'll assess your current setup and 
-            outline the direct booking system for your market.
-        </p>
+<!-- Contact -->
+<section class="contact" id="contact">
+    <span class="section-label">Start Here</span>
+    <h2>Strategy Session</h2>
+    <p class="section-subtitle">
+        15 minutes. We'll assess your current setup and 
+        outline the direct booking system for your market.
+    </p>
     
-    
-    <form class="contact-form" id="leadForm" onsubmit="return handleSubmit(event);">
+    <!-- FORM SUBMITTING DIRECTLY TO N8N -->
+    <form class="contact-form" id="leadForm">
         <div class="form-row">
             <div class="form-group">
                 <label>Name</label>
@@ -1086,42 +1086,47 @@
     </form>
 
     <script>
-    function handleSubmit(e) {
+    document.getElementById('leadForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        e.stopPropagation();
         
-        var btn = document.getElementById('submitBtn');
+        const btn = document.getElementById('submitBtn');
         btn.textContent = 'Sending...';
         btn.disabled = true;
         
-        var data = {
+        const data = {
             name: document.getElementById('formName').value,
             email: document.getElementById('formEmail').value,
             portfolio_size: document.getElementById('formSize').value,
             message: document.getElementById('formMessage').value,
-            _replyto: document.getElementById('formEmail').value
+            timestamp: new Date().toISOString(),
+            source: 'sites.guaranteedbookings.co.uk'
         };
         
-        fetch('https://formspree.io/f/mykdezwp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(function(response) {
-            console.log('Formspree response:', response);
-            // Force redirect to your page
-            window.location.replace('https://sites.guaranteedbookings.co.uk/thank-you.html');
-            return false;
-        }).catch(function(error) {
+        // YOUR N8N WEBHOOK URL
+        const N8N_WEBHOOK = 'https://n8n-self-hosted-2-6i3h.onrender.com/webhook/lead-capture';
+        
+        try {
+            const response = await fetch(N8N_WEBHOOK, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                // SUCCESS - Redirect to your thank you page
+                window.location.href = 'https://sites.guaranteedbookings.co.uk/thank-you.html';
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (error) {
             console.error('Error:', error);
-            alert('Error sending. Please try again.');
+            alert('Failed to send. Please email directly: info@guaranteedbookings.co.uk');
             btn.textContent = 'Request Strategy Call →';
             btn.disabled = false;
-        });
-        
-        return false; // Extra prevention
-    }
+        }
+    });
     </script>
     
     <p style="margin-top: 40px; color: var(--text-muted); font-size: 10pt;">
@@ -1149,4 +1154,5 @@
 
 </body>
 </html>
+
 
