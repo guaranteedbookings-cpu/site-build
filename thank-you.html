@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Call Requested | Guaranteed Bookings</title>
+    <meta name="description" content="Your strategy session request has been received.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #e0e0e0;
+            --text-muted: #888;
+            --gold: #D4AF37;
+            --gold-hover: #e5c158;
+            --border-subtle: rgba(212, 175, 55, 0.2);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .announcement-bar {
+            background: var(--gold);
+            color: var(--bg-dark);
+            text-align: center;
+            padding: 12px;
+            font-size: 10pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        nav {
+            position: fixed;
+            top: 36px;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo-shield {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .logo-shield::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .logo-shield span {
+            color: var(--gold);
+            font-size: 14pt;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-primary {
+            font-size: 15pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .logo-secondary {
+            font-size: 15pt;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 3px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .logo-tagline {
+            font-size: 7.5pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+        
+        .nav-accent-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+            opacity: 0.4;
+        }
+        
+        .success-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 180px 40px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 36px;
+        }
+        
+        .success-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .success-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid var(--border-subtle);
+            padding: 80px 60px;
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 40px;
+            font-size: 36pt;
+            color: var(--gold);
+        }
+        
+        .section-label {
+            font-size: 12pt;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            display: block;
+        }
+        
+        h1 {
+            font-size: 36pt;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        
+        .success-message {
+            font-size: 14pt;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+        
+        .next-steps {
+            text-align: left;
+            border-left: 3px solid var(--gold);
+            padding-left: 30px;
+            margin: 40px 0;
+        }
+        
+        .next-steps h3 {
+            font-size: 11pt;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .next-steps ul {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 12pt;
+            line-height: 2;
+        }
+        
+        .next-steps li {
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .next-steps li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 40px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11pt;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .back-link:hover {
+            color: var(--gold);
+        }
+        
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.95);
+        }
+        
+        .footer-logo {
+            font-size: 14pt;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 10pt;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 24pt; }
+            .success-content { padding: 50px 30px; }
+            .announcement-bar { font-size: 8pt; padding: 8px; }
+            .nav-container { padding: 15px 20px; }
+            .logo-shield { width: 36px; height: 36px; }
+            .logo-primary, .logo-secondary { font-size: 12pt; }
+            .success-section { padding-top: 140px; margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="announcement-bar">
+        Currently accepting 3 new operators for March deployment →
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="https://sites.guaranteedbookings.co.uk/" class="logo-lockup">
+                <div class="logo-shield">
+                    <span>GB</span>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">Guaranteed</span>
+                    <span class="logo-secondary">Bookings</span>
+                    <span class="logo-tagline">Direct Booking Systems</span>
+                </div>
+            </a>
+        </div>
+        <div class="nav-accent-line"></div>
+    </nav>
+
+    <section class="success-section">
+        <div class="success-content">
+            <div class="check-icon">✓</div>
+            
+            <span class="section-label">Request Received</span>
+            
+            <h1>Strategy Session<br>Confirmed</h1>
+            
+            <p class="success-message">
+                Your enquiry has been logged. I'm reviewing your portfolio details 
+                and will be in touch within 24 hours to schedule your call.
+            </p>
+            
+            <div class="next-steps">
+                <h3>What Happens Next</h3>
+                <ul>
+                    <li>Check your email for confirmation (check spam/junk)</li>
+                    <li>I'll personally review your current setup</li>
+                    <li>Calendar invite with Zoom link sent within 24hrs</li>
+                    <li>15-minute diagnostic call to outline your system</li>
+                </ul>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 11pt; margin-top: 30px; font-style: italic;">
+                "While you wait, calculate how much OTA fees cost you last year. That's the budget we'll free up."
+            </p>
+            
+            <a href="https://sites.guaranteedbookings.co.uk/" class="back-link">← Back to Homepage</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">GUARANTEED BOOKINGS</div>
+        <p class="footer-text">
+            Direct Booking Systems for Serviced Accommodation Operators
+        </p>
+    </footer>
+
+</body>
+</html>
