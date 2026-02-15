@@ -814,172 +814,47 @@
             opacity: 0.6;
         }
         
-/* Fix for Samsung Z Fold and mobile devices */
-@media (max-width: 768px) {
-    h1 { 
-        font-size: 28pt !important; 
-        line-height: 1.2;
-    }
-    h2 { 
-        font-size: 20pt !important; 
-    }
-    
-    .hero { 
-        background-attachment: scroll; 
-        padding: 120px 20px 60px;
-        margin-top: 0;
-        min-height: auto;
-    }
-    
-    .hero-content {
-        padding: 0 10px;
-    }
-    
-    .hero-subtitle {
-        font-size: 13pt;
-        padding: 0 10px;
-    }
-    
-    .hero-stats { 
-        grid-template-columns: 1fr; 
-        gap: 20px; 
-        margin-top: 40px;
-    }
-    
-    .stat-number {
-        font-size: 28pt;
-    }
-    
-    /* Fix blueprint grid */
-    .blueprint-grid { 
-        grid-template-columns: 1fr; 
-        gap: 20px;
-    }
-    
-    .blueprint-card {
-        padding: 25px;
-    }
-    
-    /* Fix offer grid */
-    .offer-grid { 
-        grid-template-columns: 1fr; 
-        gap: 40px;
-    }
-    
-    /* Fix case study stats */
-    .case-stats { 
-        grid-template-columns: 1fr; 
-        gap: 20px;
-    }
-    
-    .case-study {
-        padding: 30px 20px;
-    }
-    
-    /* Fix navigation */
-    .nav-links { 
-        display: none; 
-    }
-    
-    .nav-cta { 
-        display: none; 
-    }
-    
-    .nav-container {
-        padding: 15px 20px;
-        justify-content: center;
-    }
-    
-    /* Fix announcement bar */
-    .announcement-bar { 
-        font-size: 8pt; 
-        padding: 10px 5px;
-        line-height: 1.4;
-    }
-    
-    /* Fix trust bar */
-    .trust-items { 
-        flex-direction: column; 
-        gap: 10px; 
-    }
-    
-    .trust-item {
-        font-size: 11pt;
-    }
-    
-    /* Fix form */
-    .form-row { 
-        grid-template-columns: 1fr; 
-        gap: 15px;
-    }
-    
-    .contact-form {
-        padding: 0 10px;
-    }
-    
-    /* Fix price box */
-    .price-box {
-        padding: 30px 20px;
-    }
-    
-    .price {
-        font-size: 36pt;
-    }
-    
-    /* Fix logo on mobile */
-    .logo-shield { 
-        width: 36px; 
-        height: 36px; 
-    }
-    
-    .logo-primary, .logo-secondary { 
-        font-size: 12pt; 
-    }
-    
-    .logo-tagline {
-        font-size: 7pt;
-    }
-    
-    /* Fix section padding */
-    .method, .proof, .offer, .contact {
-        padding: 80px 20px;
-    }
-    
-    .section-header {
-        margin-bottom: 50px;
-    }
-    
-    /* Fix case study arrow */
-    .case-arrow {
-        transform: rotate(90deg);
-        margin: 10px 0;
-    }
+        /* Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 32pt; }
+            h2 { font-size: 24pt; }
+            .hero { 
+                background-attachment: scroll; 
+                padding-top: 140px;
+                margin-top: 0;
+            }
+            .hero-stats { grid-template-columns: 1fr; gap: 30px; }
+            .blueprint-grid { grid-template-columns: 1fr; }
+            .offer-grid { grid-template-columns: 1fr; }
+            .case-stats { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .trust-items { flex-direction: column; gap: 15px; }
+            .announcement-bar { font-size: 8pt; padding: 8px; }
+            .nav-container { padding: 15px 20px; }
+            .logo-shield { width: 36px; height: 36px; }
+            .logo-primary, .logo-secondary { font-size: 12pt; }
+        }
+        /* Fix select dropdown visibility */
+select option {
+    background-color: #111111;
+    color: #e0e0e0;
 }
 
-/* Extra fix for very narrow screens (Z Fold closed) */
-@media (max-width: 400px) {
-    h1 {
-        font-size: 24pt !important;
-    }
-    
-    .title {
-        font-size: 20pt;
-    }
-    
-    .hero {
-        padding-top: 100px;
-    }
-    
-    .cta-button {
-        padding: 15px 30px;
-        font-size: 10pt;
-    }
-    
-    .blueprint-card h3 {
-        font-size: 12pt;
-    }
+/* Alternative if the above doesn't work on all browsers */
+select {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
 }
-    
+
+select:focus option {
+    background-color: #111111;
+    color: #e0e0e0;
+}
+    </style>
+</head>
+<body>
 
     <!-- Announcement Bar -->
     <div class="announcement-bar">
@@ -1311,8 +1186,6 @@
 
 </body>
 </html>
-
-
 
 
 
