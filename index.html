@@ -1095,20 +1095,20 @@ a {
         </div>
         
         <div class="form-row">
-            <div class="form-group">
-                <label>Phone *</label>
-                <input type="tel" id="formPhone" placeholder="07700 900123" required>
-            </div>
-            <div class="form-group">
-                <label>Best Time to Call *</label>
-                <select id="formTime" required>
-                    <option value="">Select...</option>
-                    <option value="Morning (9am-12pm)">Morning (9am-12pm)</option>
-                    <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
-                    <option value="Evening (5pm-8pm)">Evening (5pm-8pm)</option>
-                </select>
-            </div>
-        </div>
+    <div class="form-group">
+        <label>Best Date to Call *</label>
+        <input type="date" id="formDate" required min="">
+    </div>
+    <div class="form-group">
+        <label>Best Time *</label>
+        <select id="formTime" required>
+            <option value="">Select...</option>
+            <option value="Morning (9am-12pm)">Morning (9am-12pm)</option>
+            <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
+            <option value="Evening (5pm-8pm)">Evening (5pm-8pm)</option>
+        </select>
+    </div>
+</div>
         
         <div class="form-group">
             <label>Property Portfolio Size *</label>
@@ -1130,6 +1130,11 @@ a {
     </form>
 
     <script>
+        // Set minimum date to tomorrow
+    const dateInput = document.getElementById('formDate');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
     document.getElementById('leadForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -1141,6 +1146,7 @@ a {
             name: document.getElementById('formName').value,
             email: document.getElementById('formEmail').value,
             phone: document.getElementById('formPhone').value,
+            call_date: document.getElementById('formDate').value,
             best_time: document.getElementById('formTime').value,
             portfolio_size: document.getElementById('formSize').value,
             message: document.getElementById('formMessage').value,
@@ -1199,6 +1205,7 @@ a {
 
 </body>
 </html>
+
 
 
 
